@@ -1,9 +1,28 @@
 package main;
 
+import players.Human;
+import players.PlayersFactory;
+
+import java.util.ArrayList;
+
 public class Main {
     public static void main(String[] args) {
         InputLoader inputLoader = new InputLoader(args[0], args[1]);
         Input input = inputLoader.load();
+        MapBuilder mapBuilder = MapBuilder.getInstance(input.getBattleGround());
+        PlayersFactory playersFactory = new PlayersFactory();
+
+        ArrayList<String> ground = mapBuilder.getBattleGround();
+
+        ArrayList<Human> players = new ArrayList<>();
+
+        for (int i = 0; i < input.getP(); ++i) {
+            String strategy = input.getPlayerTypes().get(i);
+            int ab = input.getFirstCoordonates().get(i);
+            int or = input.getSecondCoordonates().get(i);
+
+            players.add(playersFactory.getPlayer(strategy, ab, or));
+        }
 
 //        System.out.println(input.getN() + " " + input.getM());
 //
