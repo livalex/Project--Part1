@@ -1,0 +1,5 @@
+package players;
+
+public interface Visitable {
+    public void accept(Visitor visitor);
+}
