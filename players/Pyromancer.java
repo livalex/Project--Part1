@@ -4,6 +4,7 @@ import constants.Constants;
 
 public class Pyromancer extends Human implements Visitable, Visitor {
     Pyromancer(final int abscissa, final int ordinate) {
+        setPlayerType(0);
         setHp(Constants.DEFAULT_PYRO_HP);
         setMaxHp(Constants.DEFAULT_PYRO_HP);
         setCurrentAbscissa(abscissa);
@@ -19,83 +20,30 @@ public class Pyromancer extends Human implements Visitable, Visitor {
         }
     }
 
+    @Override
     public void accept(Visitor visitor) {
         visitor.fight(this);
     }
 
     // Visit from visitor
+    @Override
     public void fight(Pyromancer pyromancer) {
-        if (isDead() == false) {
-            if (isNewOvertimeAffection() == true) {
-                if (isIgniteFlag() == true) {
-                    setIgniteCounterRounds(2);
-                    setHp(getHp() - getIgniteDmgTakeRound());
-                    setIgniteCounterRounds(getIgniteCounterRounds() - 1);
-                    if (getHp() <= 0) {
-                        setDead(true);
-                    }
-                }
-            } else {
-                if (isIgniteFlag() == true) {
-                    setHp(getHp() - getIgniteDmgTakeRound());
-                    setIgniteCounterRounds(getIgniteCounterRounds() - 1);
-                    if (getIgniteCounterRounds() == 0) {
-                        setIgniteFlag(false);
-                        setIgniteCounterRounds(2);
-                    }
-                    if (getHp() <= 0) {
-                        setDead(true);
-                    }
-                }
-            }
-        }
-
-        setNewOvertimeAffection(false);
-
-        if (isDead() == false) {
-            pyromancer.setFireBlast(pyromancer.getFireBlast() + pyromancer.getLevel() * Constants.PYRO_INCREASE);
-            pyromancer.setIgnite(pyromancer.getIgnite() + pyromancer.getLevel() * Constants.IGN_LVL_DMG);
-            pyromancer.setIgniteDmgGiveRound(pyromancer.getIgniteDmgGiveRound() +
-                    pyromancer.getLevel() * Constants.IGN_SEC_LVL_DMG);
-
-            if (pyromancer.getCurrentGround() == 1) {
-                pyromancer.setFireBlast(Math.round(pyromancer.getFireBlast() +
-                        Constants.VOLCANIC_GRD_BONUS * pyromancer.getFireBlast()));
-                pyromancer.setIgnite(Math.round(pyromancer.getIgnite() +
-                        Constants.VOLCANIC_GRD_BONUS * pyromancer.getIgnite()));
-                pyromancer.setIgniteDmgGiveRound(Math.round(pyromancer.getIgniteDmgGiveRound() +
-                        Constants.VOLCANIC_GRD_BONUS * pyromancer.getIgniteDmgGiveRound()));
-            }
-
-            pyromancer.setFireBlast(Math.round(pyromancer.getFireBlast() -
-                    Constants.FB_IGN_PYRO_MOD * pyromancer.getFireBlast()));
-            pyromancer.setIgnite(Math.round(pyromancer.getIgnite() -
-                    Constants.FB_IGN_PYRO_MOD * pyromancer.getIgnite()));
-            pyromancer.setIgniteDmgGiveRound(Math.round(pyromancer.getIgniteDmgGiveRound() -
-                    Constants.FB_IGN_PYRO_MOD * pyromancer.getIgniteDmgGiveRound()));
-
-            setIgniteDmgTakeRound(pyromancer.getIgniteDmgGiveRound());
-            setNewOvertimeAffection(true);
-            setIgniteFlag(true);
-
-            int finalDamage = pyromancer.getFireBlast() + pyromancer.getIgnite();
-            setHp(getHp() - finalDamage);
-
-            if (getHp() <= 0) {
-                setDead(true);
-                pyromancer.setXp(Math.max(0, 200 - (pyromancer.getLevel() - getLevel()) * 40));
-            }
-        }
+        super.checkOverTimeAbility();
+        super.pyroGame(pyromancer, Constants.FB_IGN_PYRO_MOD, Constants.FB_IGN_PYRO_MOD, Constants.VOLCANIC_GRD_BONUS);
     }
 
+    @Override
     public void fight(Rogue rogue) {
 
     }
 
+    @Override
     public void fight(Knight knight) {
-
+        super.checkOverTimeAbility();
+        super.knightGame(knight, Constants.EXEC_PYRO_MOD, Constants.SLAM_PYRO_MOD, Constants.LAND_GRD_BONUS);
     }
 
+    @Override
     public void fight(Wizard wizard) {
 
     }
