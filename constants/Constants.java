@@ -12,7 +12,6 @@ public class Constants {
     public static final int FIREBLAST_DAMAGE = 350;
     public static final int IGNITE_BASE_DAMAGE = 150;
     public static final float VOLCANIC_GRD_BONUS = 0.25f;
-    public static final float FB_IGN_PYRO_MOD = 0.1f;
     public static final int IGN_LVL_DMG = 20;
     public static final int IGN_SEC_LVL_DMG = 30;
     public static final int DEFAULT_ROGUE_HP = 600;
@@ -21,4 +20,21 @@ public class Constants {
     public static final int WIZARD_INCREASE = 30;
     public static final int DEFAULT_KNIGHT_HP = 900;
     public static final int KNIGHT_INCREASE = 80;
+    public static final int DEFAULT_PLAYER = 0;
+    public static final float FB_IGN_ROGUE_MOD= 0.2f;
+    public static final float FB_IGN_WIZARD_MOD= 0.05f;
+    public static final float FB_IGN_KNIGHT_MOD= 0.2f;
+    public static final float FB_IGN_PYRO_MOD = -0.1f;
+    public static final int EXECUTE_DAMAGE = 200;
+    public static final int EXECUTE_INCREASE = 30;
+    public static final int SLAM_DAMAGE = 100;
+    public static final int SLAM_INCREASE = 40;
+    public static final float LAND_GRD_BONUS = 0.15f;
+    public static final float EXEC_PYRO_MOD = 0.1f;
+    public static final float SLAM_PYRO_MOD = -0.1f;
+    public static final float HP_LIMIT_FPARAM = 0.2f;
+    public static final float HP_LIMIT_SPARAM = 0.01f;
+    public static final float MAX_KNIGHT_HP_LIMIT = 0.4f;
+    public static final float EXEC_KNIGHT_MOD = 0.0f;
+    public static final float SLAM_KNIGHT_MOD = 0.2f;
 }
