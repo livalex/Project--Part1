@@ -5,21 +5,31 @@ import players.PlayersFactory;
 
 import java.util.ArrayList;
 
-public class Main {
-    public static void main(String[] args) {
+public final class Main {
+    private Main() {
+    }
+
+    public static void main(final String[] args) {
+        // Objects used read and write data.
         InputLoader inputLoader = new InputLoader(args[0], args[1]);
         Input input = inputLoader.load();
+
+        // Instantiations.
         MapBuilder mapBuilder = MapBuilder.getInstance(input.getBattleGround());
         VectorCreator vectorCreator = VectorCreator.getInstance();
         ActionCreator actionCreator = ActionCreator.getInstance();
-//        OutputDisplayer outputDisplayer = OutputDisplayer.getInstance();
         PlayersFactory playersFactory = new PlayersFactory();
 
+        // Build the 'map'.
         ArrayList<String> ground = mapBuilder.getBattleGround();
+
+        // Create the players vector
         ArrayList<Human> players = vectorCreator.createVector(input.getP(), playersFactory, input);
 
+        // Play game.
         players = actionCreator.createMoves(input.getR(), input.getP(), input, players, ground);
-//        outputDisplayer.displayOutput(players);
+
+        // Display the output.
         inputLoader.exposeOutput(players);
     }
 }
