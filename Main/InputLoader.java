@@ -1,5 +1,6 @@
 package main;
 
+import constants.Constants;
 import fileio.FileSystem;
 import players.Human;
 
@@ -48,55 +49,45 @@ public final class InputLoader {
             fileSystem.close();
 
         } catch (Exception e) {
-            e.printStackTrace();;
+            e.printStackTrace();
         }
 
         return new Input(n, m, battleGround, p, playerTypes,
                 firstCoordonates, secondCoordonates, r, moves);
     }
 
-//    public void exposeDeath(Human player) {
-//        FileSystem fileSystem = new FileSystem(inpPath, outPath);
-//        try {
-//            if (player.getPlayerType() == 0) {
-//                fileSystem.writeCharacter('P');
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
+    // Check the first letter of the output of the player.
+    public void typeDecider(final Human player, final FileSystem fileSystem) {
+        try {
+            if (player.getPlayerType() == Constants.PLAYER_TYPE_ZERO) {
+                fileSystem.writeCharacter('P');
+            } else if (player.getPlayerType() == Constants.PLAYER_TYPE_ONE) {
+                fileSystem.writeCharacter('K');
+            } else if (player.getPlayerType() == Constants.PLAYER_TYPE_TWO) {
+                fileSystem.writeCharacter('W');
+            } else if (player.getPlayerType() == Constants.PLAYER_TYPE_THREE) {
+                fileSystem.writeCharacter('R');
+            }
+            fileSystem.writeCharacter(' ');
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-    public void exposeOutput(ArrayList<Human> players) {
+    // Used to display if the file.
+    public void exposeOutput(final ArrayList<Human> players) {
         try {
             FileSystem fileSystem = new FileSystem(inpPath, outPath);
 
             int j, size = players.size();
             for (j = 0; j < size; ++j) {
                 Human player = players.get(j);
-                if (player.getHp() <= 0) {
-                    if (player.getPlayerType() == 0) {
-                        fileSystem.writeCharacter('P');
-                    } else if (player.getPlayerType() == 1) {
-                        fileSystem.writeCharacter('K');
-                    } else if (player.getPlayerType() == 2) {
-                        fileSystem.writeCharacter('W');
-                    } else if (player.getPlayerType() == 3) {
-                        fileSystem.writeCharacter('R');
-                    }
-                    fileSystem.writeCharacter(' ');
+                if (player.isDead()) {
+                    typeDecider(player, fileSystem);
                     fileSystem.writeWord("dead");
                     fileSystem.writeNewLine();
                 } else {
-                    if (player.getPlayerType() == 0) {
-                         fileSystem.writeCharacter('P');
-                    } else if (player.getPlayerType() == 1) {
-                        fileSystem.writeCharacter('K');
-                    } else if (player.getPlayerType() == 2) {
-                        fileSystem.writeCharacter('W');
-                    } else if (player.getPlayerType() == 3) {
-                        fileSystem.writeCharacter('R');
-                    }
-                    fileSystem.writeCharacter(' ');
+                    typeDecider(player, fileSystem);
                     fileSystem.writeInt(player.getLevel());
                     fileSystem.writeCharacter(' ');
                     fileSystem.writeInt(player.getXp());
