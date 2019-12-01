@@ -1,6 +1,9 @@
 package constants;
 
-public class Constants {
+public final class Constants {
+    private Constants() {
+    }
+
     public static final int STARTING_HP = 100;
     public static final int STARTING_XP = 0;
     public static final int STARTING_GROUND = 0;
@@ -16,14 +19,13 @@ public class Constants {
     public static final int IGN_SEC_LVL_DMG = 30;
     public static final int DEFAULT_ROGUE_HP = 600;
     public static final int ROGUE_INCREASE = 40;
-    public static final int DEFAULT_WIZARD_HP= 400;
+    public static final int DEFAULT_WIZARD_HP = 400;
     public static final int WIZARD_INCREASE = 30;
     public static final int DEFAULT_KNIGHT_HP = 900;
     public static final int KNIGHT_INCREASE = 80;
     public static final int DEFAULT_PLAYER = 0;
-    public static final float FB_IGN_ROGUE_MOD= 0.2f;
-    public static final float FB_IGN_WIZARD_MOD= 0.05f;
-    public static final float FB_IGN_KNIGHT_MOD= 0.2f;
+    public static final float FB_IGN_WIZARD_MOD = 0.05f;
+    public static final float FB_IGN_KNIGHT_MOD = 0.2f;
     public static final float FB_IGN_PYRO_MOD = -0.1f;
     public static final int EXECUTE_DAMAGE = 200;
     public static final int EXECUTE_INCREASE = 30;
@@ -37,4 +39,55 @@ public class Constants {
     public static final float MAX_KNIGHT_HP_LIMIT = 0.4f;
     public static final float EXEC_KNIGHT_MOD = 0.0f;
     public static final float SLAM_KNIGHT_MOD = 0.2f;
+    public static final float FB_ROGUE_MOD = -0.2f;
+    public static final float IGNITE_ROGUE_MOD = -0.2f;
+    public static final float EXEC_ROGUE_MOD = 0.15f;
+    public static final float SLAM_ROGUE_MOD = -0.2f;
+    public static final int BACKSTAB_DEFAULT_DAMAGE = 200;
+    public static final int BACKSTAB_LVL_INC = 20;
+    public static final float CRITICAL_HIT = 1.5f;
+    public static final float WOODS_GRD_BONUS = 0.15f;
+    public static final int PARALYSIS_DEFAULT_DAMAGE = 40;
+    public static final int PARALYSIS_LVL_INC = 10;
+    public static final float BACKSTAB_ROGUE_MOD = 0.2f;
+    public static final float PARALYSIS_ROGUE_MOD = -0.1f;
+    public static final float BACKSTAB_PYRO_MOD = 0.25f;
+    public static final float PARALYSIS_PYRO_MOD = 0.2f;
+    public static final float BACKSTAB_KNIGHT_MOD = -0.1f;
+    public static final float PARALYSIS_KNIGHT_MOD = -0.2f;
+    public static final float BACKSTAB_PARALYSIS_WIZARD_MOD = 0.25f;
+    public static final float EXECUTE_WIZARD_MOD = -0.2f;
+    public static final float SLAM_WIZARD_MOD = 0.05f;
+    public static final float DESERT_GRD_BONUS = 0.1f;
+    public static final float DRAIN_WIZARD_MOD = 0.05f;
+    public static final float WIZARD_PROCENT = 0.2f;
+    public static final float WIZARD_LEVEL_MULTIPLIER = 0.05f;
+    public static final float DRAIN_ROGUE_MOD = -0.2f;
+    public static final float DRAIN_KNIGHT_MOD = 0.2f;
+    public static final float DRAIN_PYRO_MOD = -0.1f;
+    public static final float DEFLECT_ROGUE_MOD = 0.2f;
+    public static final float DEFLECT_KNIGHT_MOD = 0.4f;
+    public static final float DEFLECT_PYRO_MOD = 0.3f;
+    public static final float WIZARD_MULTIPLIER_FACTOR = 0.3f;
+    public static final float DEFLECT_PERCENTAGE = 0.35f;
+    public static final float DEFLECT_LVL_MULTIPLIER = 0.02f;
+    public static final float DEFLECT_MAX_PERCENTAGE = 0.7f;
+    public static final int PLAYER_TYPE_ZERO = 0;
+    public static final int PLAYER_TYPE_ONE = 1;
+    public static final int PLAYER_TYPE_TWO = 2;
+    public static final int PLAYER_TYPE_THREE = 3;
+    public static final int ZERO_TYPE_GROUND = 0;
+    public static final int ONE_TYPE_GROUND = 1;
+    public static final int TWO_TYPE_GROUND = 2;
+    public static final int THREE_TYPE_GROUND = 3;
+    public static final int XP_FORMULA_FACTOR = 200;
+    public static final int XP_FORMULA_MULTIPLICATION = 40;
+    public static final int LVL_UP_FACTOR = 250;
+    public static final int LVL_UP_MULTIPLICATION = 50;
+    public static final int DEFAULT_BS_COUNTER = 3;
+    public static final int ABILITY_COUNTER = 2;
+    public static final int DEFAULT_STARTING_VALUE = 0;
+    public static final int WOODS_HIT = 6;
+    public static final int NORMAL_HIT = 3;
+
 }
