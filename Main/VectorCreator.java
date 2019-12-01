@@ -18,7 +18,9 @@ public final class VectorCreator {
         return vectorCreator;
     }
 
-    public ArrayList<Human> createVector(final int n, final PlayersFactory playersFactory,final Input input) {
+    // Using the factory pattern it adds players in the 'players' array.
+    public ArrayList<Human> createVector(final int n,
+                                         final PlayersFactory playersFactory, final Input input) {
         ArrayList<Human> players = new ArrayList<>();
 
         for (int i = 0; i < n; ++i) {
