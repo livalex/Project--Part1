@@ -1,11 +1,8 @@
 package players;
 
-import players.Rogue;
-import players.Wizard;
-
-public interface Visitor {
-    public void fight(Pyromancer pyromancer);
-    public void fight(Rogue rogue);
-    public void fight(Knight knight);
-    public void fight(Wizard wizard);
+interface Visitor {
+    void fight(Pyromancer pyromancer);
+    void fight(Rogue rogue);
+    void fight(Knight knight);
+    void fight(Wizard wizard);
 }
