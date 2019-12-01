@@ -4,49 +4,42 @@ import constants.Constants;
 
 public class Knight extends Human implements Visitable, Visitor {
     Knight(final int abscissa, final int ordinate) {
-        setPlayerType(1);
+        setPlayerType(Constants.PLAYER_TYPE_ONE);
         setHp(Constants.DEFAULT_KNIGHT_HP);
         setMaxHp(Constants.DEFAULT_KNIGHT_HP);
         setCurrentAbscissa(abscissa);
         setCurrentOrdinate(ordinate);
     }
 
+    // Accept the visitor.
     @Override
-    public void computeLevel() {
-        if (getXp() >= 250 + getLevel() * 50) {
-            setLevel(getLevel() + 1);
-            setMaxHp(getMaxHp() + Constants.KNIGHT_INCREASE);
-            setHp(getMaxHp());
-        }
-    }
-
-    @Override
-    public void accept(Visitor visitor) {
+    public final void accept(final Visitor visitor) {
         visitor.fight(this);
     }
 
-    // Visit from visitor
     @Override
-    public void fight(Pyromancer pyromancer) {
-        super.checkOverTimeAbility();
+    public final void fight(final Pyromancer pyromancer) {
         super.pyroGame(pyromancer, Constants.FB_IGN_KNIGHT_MOD,
                 Constants.FB_IGN_KNIGHT_MOD, Constants.VOLCANIC_GRD_BONUS);
     }
 
+    // Be the visitor.
     @Override
-    public void fight(Rogue rogue) {
+    public final void fight(final Rogue rogue) {
+        super.rogueGame(rogue, Constants.BACKSTAB_KNIGHT_MOD,
+                Constants.PARALYSIS_KNIGHT_MOD, Constants.WOODS_GRD_BONUS);
+    }
+
+    @Override
+    public final void fight(final Knight knight) {
+        super.knightGame(knight, Constants.EXEC_KNIGHT_MOD,
+                Constants.SLAM_KNIGHT_MOD, Constants.LAND_GRD_BONUS);
 
     }
 
     @Override
-    public void fight(Knight knight) {
-        super.checkOverTimeAbility();
-        super.knightGame(knight, Constants.EXEC_KNIGHT_MOD, Constants.SLAM_KNIGHT_MOD, Constants.LAND_GRD_BONUS);
+    public final void fight(final Wizard wizard) {
+        super.wizardGame(wizard, Constants.DRAIN_KNIGHT_MOD,
+                Constants.DEFLECT_KNIGHT_MOD, Constants.DESERT_GRD_BONUS);
     }
-
-    @Override
-    public void fight(Wizard wizard) {
-
-    }
-
 }
