@@ -2,7 +2,9 @@ package main;
 
 import java.util.ArrayList;
 
-public class Input {
+public final class Input {
+
+    // Input fields.
     private final int n;
     private final int m;
     private final int p;
@@ -27,7 +29,8 @@ public class Input {
 
     public Input(final int n, final int m, final ArrayList<String> battleGround, final int p,
                  final ArrayList<String> playerTypes, final ArrayList<Integer> firstCoordonates,
-                 final ArrayList<Integer> secondCoordonates, final int r, final ArrayList<String> moves) {
+                 final ArrayList<Integer> secondCoordonates, final int r,
+                 final ArrayList<String> moves) {
         this.n = n;
         this.m = m;
         this.battleGround = battleGround;
@@ -74,4 +77,5 @@ public class Input {
     public ArrayList<String> getMoves() {
         return moves;
     }
+
 }
