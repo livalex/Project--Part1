@@ -1,6 +1,7 @@
 package players;
 
-public class PlayersFactory {
+public final class PlayersFactory {
+    // It returns a player of certain stats and certain type.
     public Human getPlayer(final String type, final int abs, final int ord) {
         if (type.equalsIgnoreCase("R")) {
             return new Rogue(abs, ord);
