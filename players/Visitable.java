@@ -1,5 +1,5 @@
 package players;
 
-public interface Visitable {
-    public void accept(Visitor visitor);
+interface Visitable {
+    void accept(Visitor visitor);
 }
