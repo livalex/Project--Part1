@@ -4,106 +4,41 @@ import constants.Constants;
 
 public class Rogue extends Human implements Visitable, Visitor {
     Rogue(final int abscissa, final int ordinate) {
-        setPlayerType(3);
+        setPlayerType(Constants.PLAYER_TYPE_THREE);
         setHp(Constants.DEFAULT_ROGUE_HP);
         setMaxHp(Constants.DEFAULT_ROGUE_HP);
         setCurrentAbscissa(abscissa);
         setCurrentOrdinate(ordinate);
     }
 
+    // Accept the visitor.
     @Override
-    public void computeLevel() {
-        if (getXp() >= 250 + getLevel() * 50) {
-            setLevel(getLevel() + 1);
-            setMaxHp(getMaxHp() + Constants.ROGUE_INCREASE);
-            setHp(getMaxHp());
-        }
-    }
-
-    @Override
-    public void accept(Visitor visitor) {
+    public final void accept(final Visitor visitor) {
         visitor.fight(this);
     }
 
-    // Visit from visitor
-    public void fight(Pyromancer pyromancer) {
-        if (!isDead()) {
-            if (isNewOvertimeAffection()) {
-                if (isIgniteFlag()) {
-                    setOveryimeAbilityCounter(2);
-                    setHp(getHp() - getIgniteDmgTakeRound());
-                    setOveryimeAbilityCounter(getOveryimeAbilityCounter() - 1);
-                    if (getHp() <= 0) {
-                        setDead(true);
-                    }
-                }
-            } else {
-                if (isIgniteFlag()) {
-                    setHp(getHp() - getIgniteDmgTakeRound());
-                    setOveryimeAbilityCounter(getOveryimeAbilityCounter() - 1);
-                    if (getOveryimeAbilityCounter() == 0) {
-                        setIgniteFlag(false);
-                        setOveryimeAbilityCounter(2);
-                    }
-                    if (getHp() <= 0) {
-                        setDead(true);
-                    }
-                }
-            }
-        }
-
-        setNewOvertimeAffection(false);
-
-        if (!isDead()) {
-            pyromancer.setFireBlast(pyromancer.getFireBlast() + pyromancer.getLevel() * Constants.PYRO_INCREASE);
-            pyromancer.setIgnite(pyromancer.getIgnite() + pyromancer.getLevel() * Constants.IGN_LVL_DMG);
-            pyromancer.setIgniteDmgGiveRound(pyromancer.getIgniteDmgGiveRound() +
-                    pyromancer.getLevel() * Constants.IGN_SEC_LVL_DMG);
-
-            if (pyromancer.getCurrentGround() == 1) {
-                pyromancer.setFireBlast(Math.round(pyromancer.getFireBlast() +
-                        Constants.VOLCANIC_GRD_BONUS * pyromancer.getFireBlast()));
-                pyromancer.setIgnite(Math.round(pyromancer.getIgnite() +
-                        Constants.VOLCANIC_GRD_BONUS * pyromancer.getIgnite()));
-                pyromancer.setIgniteDmgGiveRound(Math.round(pyromancer.getIgniteDmgGiveRound() +
-                        Constants.VOLCANIC_GRD_BONUS * pyromancer.getIgniteDmgGiveRound()));
-            }
-
-            pyromancer.setFireBlast(Math.round(pyromancer.getFireBlast() -
-                    Constants.FB_IGN_ROGUE_MOD * pyromancer.getFireBlast()));
-            pyromancer.setIgnite(Math.round(pyromancer.getIgnite() -
-                    Constants.FB_IGN_ROGUE_MOD * pyromancer.getIgnite()));
-            pyromancer.setIgniteDmgGiveRound(Math.round(pyromancer.getIgniteDmgGiveRound() -
-                    Constants.FB_IGN_ROGUE_MOD * pyromancer.getIgniteDmgGiveRound()));
-
-            setIgniteDmgTakeRound(pyromancer.getIgniteDmgGiveRound());
-            setNewOvertimeAffection(true);
-            setIgniteFlag(true);
-            setImmobility(false);
-
-            int finalDamage = pyromancer.getFireBlast() + pyromancer.getIgnite();
-            setHp(getHp() - finalDamage);
-
-            if (getHp() <= 0) {
-                setDead(true);
-                pyromancer.setXp(Math.max(0, 200 - (pyromancer.getLevel() - getLevel()) * 40));
-            }
-        }
+    // Be the visitor.
+    @Override
+    public final void fight(final Pyromancer pyromancer) {
+        super.pyroGame(pyromancer, Constants.FB_ROGUE_MOD,
+                Constants.IGNITE_ROGUE_MOD, Constants.VOLCANIC_GRD_BONUS);
     }
 
     @Override
-    public void fight(Rogue rogue) {
-
+    public final void fight(final Rogue rogue) {
+        super.rogueGame(rogue, Constants.BACKSTAB_ROGUE_MOD,
+                Constants.PARALYSIS_ROGUE_MOD, Constants.WOODS_GRD_BONUS);
     }
 
     @Override
-    public void fight(Knight knight) {
-
+    public final void fight(final Knight knight) {
+        super.knightGame(knight, Constants.EXEC_ROGUE_MOD,
+                Constants.SLAM_ROGUE_MOD, Constants.LAND_GRD_BONUS);
     }
 
     @Override
-    public void fight(Wizard wizard) {
-
+    public final void fight(final Wizard wizard) {
+        super.wizardGame(wizard, Constants.DRAIN_ROGUE_MOD,
+                Constants.DEFLECT_ROGUE_MOD, Constants.DESERT_GRD_BONUS);
     }
-
 }
