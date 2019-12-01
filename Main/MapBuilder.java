@@ -5,9 +5,9 @@ import java.util.ArrayList;
 public final class MapBuilder {
     private static MapBuilder mapBuilder = null;
 
-    ArrayList<String> battleGround;
+    private ArrayList<String> battleGround;
 
-    private MapBuilder(ArrayList<String> battleGround) {
+    private MapBuilder(final ArrayList<String> battleGround) {
         this.battleGround = battleGround;
     }
 
@@ -15,7 +15,7 @@ public final class MapBuilder {
         return battleGround;
     }
 
-    public static MapBuilder getInstance(ArrayList<String> battleGround) {
+    public static MapBuilder getInstance(final ArrayList<String> battleGround) {
         if (mapBuilder == null) {
             mapBuilder = new MapBuilder(battleGround);
         }
