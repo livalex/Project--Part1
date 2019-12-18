@@ -9,6 +9,7 @@ public class Knight extends Human implements Visitable, Visitor {
         setMaxHp(Constants.DEFAULT_KNIGHT_HP);
         setCurrentAbscissa(abscissa);
         setCurrentOrdinate(ordinate);
+        setPlayerNumber(getPlayerNumber() + 1);
     }
 
     // Accept the visitor.

@@ -9,6 +9,7 @@ public class Pyromancer extends Human implements Visitable, Visitor {
         setMaxHp(Constants.DEFAULT_PYRO_HP);
         setCurrentAbscissa(abscissa);
         setCurrentOrdinate(ordinate);
+        setPlayerNumber(getPlayerNumber() + 1);
     }
 
     // Accept he visitor.

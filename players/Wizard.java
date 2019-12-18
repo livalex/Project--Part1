@@ -9,6 +9,7 @@ public class Wizard extends Human implements Visitable, Visitor {
         setMaxHp(Constants.DEFAULT_WIZARD_HP);
         setCurrentAbscissa(abscissa);
         setCurrentOrdinate(ordinate);
+        setPlayerNumber(getPlayerNumber() + 1);
     }
 
     // Accept the visitor.

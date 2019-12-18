@@ -29,6 +29,15 @@ public abstract class Human implements Visitor, Visitable {
     private boolean woodsHitFlag = false;
     private int paralysisDmgTakeRound = Constants.DEFAULT_STARTING_VALUE;
     private int noRaceDamage = Constants.DEFAULT_STARTING_VALUE;
+    private int playerNumber = Constants.DEFAULT_PLAYER_NUMBER;
+
+    public int getPlayerNumber() {
+        return playerNumber;
+    }
+
+    public void setPlayerNumber(int playerNumber) {
+        this.playerNumber = playerNumber;
+    }
 
     public final int getNoRaceDamage() {
         return noRaceDamage;
