@@ -9,7 +9,6 @@ public class Rogue extends Human implements Visitable, Visitor {
         setMaxHp(Constants.DEFAULT_ROGUE_HP);
         setCurrentAbscissa(abscissa);
         setCurrentOrdinate(ordinate);
-        setPlayerNumber(getPlayerNumber() + 1);
     }
 
     // Accept the visitor.

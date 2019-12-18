@@ -89,15 +89,5 @@ public final class Constants {
     public static final int DEFAULT_STARTING_VALUE = 0;
     public static final int WOODS_HIT = 6;
     public static final int NORMAL_HIT = 3;
-    public static final int DAMAGE_ANGEL = 4;
-    public static final int DARK_ANGEL = 5;
-    public static final int DRACULA_ANGEL = 6;
-    public static final int GOOD_BOY_ANGEL = 7;
-    public static final int LEVEL_UP_ANGEL = 8;
-    public static final int LIFE_GIVER_ANGEL = 9;
-    public static final int SMALL_ANGEL = 10;
-    public static final int SPAWNER_ANGEL = 11;
-    public static final int THE_DOOMER_ANGEL = 12;
-    public static final int XP_ANGEL = 13;
-    public static final int DEFAULT_PLAYER_NUMBER = -1;
+
 }
