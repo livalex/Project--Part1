@@ -1,10 +1,22 @@
 package main;
 
+import angels.Angel;
+import angels.AngelsFactory;
 import constants.Constants;
 import players.Human;
 import java.util.ArrayList;
 
 public final class ActionCreator {
+    private int vectorIterator = Constants.DEFAULT_STARTING_VALUE;
+
+    public int getVectorIterator() {
+        return vectorIterator;
+    }
+
+    public void setVectorIterator(int vectorIterator) {
+        this.vectorIterator = vectorIterator;
+    }
+
     private static ActionCreator actionCreator = null;
 
     private ActionCreator() {
@@ -100,42 +112,70 @@ public final class ActionCreator {
         return players;
     }
 
+    public ArrayList<Human> checkForMovement(final int m, final ArrayList<Human> players,
+                                  final ArrayList<String> ground, final int i,
+                                  final Input input) {
+        for (int j = 0; j < m; ++j) {
+            // Check if they move and if they can move.
+            Human player = players.get(j);
+            if (input.getMoves().get(i).charAt(j) == 'R'
+                    && !player.isImmobility() && !player.isParalysed()) {
+                player.setCurrentOrdinate(players.get(j).getCurrentOrdinate() + 1);
+                groundSetter(ground, player);
+            } else if (input.getMoves().get(i).charAt(j) == 'L'
+                    && !player.isImmobility() && !player.isParalysed()) {
+                player.setCurrentOrdinate(players.get(j).getCurrentOrdinate() - 1);
+                groundSetter(ground, player);
+            } else if (input.getMoves().get(i).charAt(j) == 'U'
+                    && !player.isImmobility() && !player.isParalysed()) {
+                player.setCurrentAbscissa(players.get(j).getCurrentAbscissa() - 1);
+                groundSetter(ground, player);
+            } else if (input.getMoves().get(i).charAt(j) == 'D'
+                    && !player.isImmobility() && !player.isParalysed()) {
+                player.setCurrentAbscissa(players.get(j).getCurrentAbscissa() + 1);
+                groundSetter(ground, player);
+            } else if (input.getMoves().get(i).charAt(j) == '_'
+                    && !player.isImmobility() && !player.isParalysed()) {
+                groundSetter(ground, player);
+            }
+        }
+        return players;
+    }
+
+    public ArrayList<Angel> angelsVectorCreator(final Input input, final int i,
+                                                int vectorIterator, final InputLoader inputLoader) {
+        ArrayList<Angel> angels = new ArrayList<>();
+        AngelsFactory angelsFactory = new AngelsFactory();
+        for (int j = 0; j < input.getNumberAngelsRound().get(i); ++j) {
+            String string = input.getAngelTypes().get(vectorIterator);
+            String angelType = string.substring(0, string.length() - 4);
+            Integer firstCoordinate = Character.getNumericValue(string.charAt(string.length() - 3));
+            Integer secondCoordinate = Character.getNumericValue(string.charAt(string.length() - 1));
+            Angel angel = angelsFactory.getAngel(angelType, firstCoordinate, secondCoordinate);
+            angels.add(angel);
+            inputLoader.displayAngel(angel);
+            setVectorIterator(getVectorIterator() + 1);
+        }
+        return angels;
+    }
 
     public ArrayList<Human> createMoves(final int n, final int m, final Input input,
-                                        ArrayList<Human> players, final ArrayList<String> ground) {
+                                        ArrayList<Human> players, final ArrayList<String> ground,
+                                        final InputLoader inputLoader) {
         for (int i = 0; i < n; ++i) {
-            for (int j = 0; j < m; ++j) {
-                // Check if they move and if they can move.
-                Human player = players.get(j);
-                if (input.getMoves().get(i).charAt(j) == 'R'
-                        && !player.isImmobility() && !player.isParalysed()) {
-                    player.setCurrentOrdinate(players.get(j).getCurrentOrdinate() + 1);
-                    groundSetter(ground, player);
-                } else if (input.getMoves().get(i).charAt(j) == 'L'
-                        && !player.isImmobility() && !player.isParalysed()) {
-                    player.setCurrentOrdinate(players.get(j).getCurrentOrdinate() - 1);
-                    groundSetter(ground, player);
-                } else if (input.getMoves().get(i).charAt(j) == 'U'
-                        && !player.isImmobility() && !player.isParalysed()) {
-                    player.setCurrentAbscissa(players.get(j).getCurrentAbscissa() - 1);
-                    groundSetter(ground, player);
-                } else if (input.getMoves().get(i).charAt(j) == 'D'
-                        && !player.isImmobility() && !player.isParalysed()) {
-                    player.setCurrentAbscissa(players.get(j).getCurrentAbscissa() + 1);
-                    groundSetter(ground, player);
-                } else if (input.getMoves().get(i).charAt(j) == '_'
-                        && !player.isImmobility() && !player.isParalysed()) {
-                    groundSetter(ground, player);
-                }
-            }
+            inputLoader.displayRound(i + 1);
+            players = checkForMovement(m, players, ground, i, input);
 
             // Take into consideration their overtime affections.
             for (int k = 0; k < m; ++k) {
                 Human player = players.get(k);
                 player.checkOverTimeAbility();
             }
+            ArrayList<Angel> angels = angelsVectorCreator(input, i, vectorIterator, inputLoader);
 
             players = battle(n, m, players);
+
+            inputLoader.createSpace();
         }
         return players;
     }

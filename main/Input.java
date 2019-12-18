@@ -14,6 +14,8 @@ public final class Input {
     private final ArrayList<Integer> firstCoordonates;
     private final ArrayList<Integer> secondCoordonates;
     private final ArrayList<String> moves;
+    private final ArrayList<Integer> numberAngelsRound;
+    private final ArrayList<String> angelTypes;
 
     public Input() {
         n = 0;
@@ -25,12 +27,15 @@ public final class Input {
         secondCoordonates = null;
         firstCoordonates = null;
         moves = null;
+        numberAngelsRound = null;
+        angelTypes = null;
     }
 
     public Input(final int n, final int m, final ArrayList<String> battleGround, final int p,
                  final ArrayList<String> playerTypes, final ArrayList<Integer> firstCoordonates,
                  final ArrayList<Integer> secondCoordonates, final int r,
-                 final ArrayList<String> moves) {
+                 final ArrayList<String> moves, final ArrayList<Integer> numberAngelsRound,
+                 final ArrayList<String> angelTypes) {
         this.n = n;
         this.m = m;
         this.battleGround = battleGround;
@@ -40,6 +45,8 @@ public final class Input {
         this.secondCoordonates = secondCoordonates;
         this.r = r;
         this.moves = moves;
+        this.numberAngelsRound = numberAngelsRound;
+        this.angelTypes = angelTypes;
     }
 
     public int getN() {
@@ -78,4 +85,11 @@ public final class Input {
         return moves;
     }
 
+    public ArrayList<Integer> getNumberAngelsRound() {
+        return numberAngelsRound;
+    }
+
+    public ArrayList<String> getAngelTypes() {
+        return angelTypes;
+    }
 }
